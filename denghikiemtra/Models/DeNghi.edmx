@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DeNghiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DeNghi.dbo.tbl_DeNghiKiemTra' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tbl_DeNghiKiemTra">
+          <Key>
+            <PropertyRef Name="STT" />
+            <PropertyRef Name="Tên" />
+          </Key>
+          <Property Name="STT" Type="int" Nullable="false" />
+          <Property Name="Tên" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ngày đăng ký" Type="smalldatetime" />
+          <Property Name="Phường" Type="nvarchar" MaxLength="50" />
+          <Property Name="Quận" Type="nvarchar" MaxLength="20" />
+          <Property Name="Địa chỉ" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="tbl_DeNghiKiemTraOnline">
+          <Key>
+            <PropertyRef Name="STT" />
+          </Key>
+          <Property Name="STT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ten" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Phuong" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Quan" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="LyDo" Type="nchar" MaxLength="10" />
+          <Property Name="HinhAnh" Type="nvarchar" MaxLength="150" />
+          <Property Name="TrangThai" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="DeNghiModelStoreContainer">
+          <EntitySet Name="tbl_DeNghiKiemTraOnline" EntityType="Self.tbl_DeNghiKiemTraOnline" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_DeNghiKiemTra" EntityType="Self.tbl_DeNghiKiemTra" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tbl_DeNghiKiemTra].[STT] AS [STT], 
+    [tbl_DeNghiKiemTra].[Tên] AS [Tên], 
+    [tbl_DeNghiKiemTra].[Ngày đăng ký] AS [Ngày đăng ký], 
+    [tbl_DeNghiKiemTra].[Phường] AS [Phường], 
+    [tbl_DeNghiKiemTra].[Quận] AS [Quận], 
+    [tbl_DeNghiKiemTra].[Địa chỉ] AS [Địa chỉ]
+    FROM [dbo].[tbl_DeNghiKiemTra] AS [tbl_DeNghiKiemTra]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DeNghiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_DeNghiKiemTraOnline">
+          <Key>
+            <PropertyRef Name="STT" />
+          </Key>
+          <Property Name="STT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DiaChi" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phuong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Quan" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LyDo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="HinhAnh" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="TrangThai" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_DeNghiKiemTra">
+          <Key>
+            <PropertyRef Name="STT" />
+            <PropertyRef Name="Tên" />
+          </Key>
+          <Property Name="STT" Type="Int32" Nullable="false" />
+          <Property Name="Tên" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ngày_đăng_ký" Type="DateTime" Precision="0" />
+          <Property Name="Phường" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quận" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Địa_chỉ" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="DeNghiEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_DeNghiKiemTraOnline" EntityType="Self.tbl_DeNghiKiemTraOnline" />
+          <EntitySet Name="tbl_DeNghiKiemTra" EntityType="Self.tbl_DeNghiKiemTra" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DeNghiModelStoreContainer" CdmEntityContainer="DeNghiEntities">
+          <EntitySetMapping Name="tbl_DeNghiKiemTraOnline">
+            <EntityTypeMapping TypeName="DeNghiModel.tbl_DeNghiKiemTraOnline">
+              <MappingFragment StoreEntitySet="tbl_DeNghiKiemTraOnline">
+                <ScalarProperty Name="STT" ColumnName="STT" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="Phuong" ColumnName="Phuong" />
+                <ScalarProperty Name="Quan" ColumnName="Quan" />
+                <ScalarProperty Name="LyDo" ColumnName="LyDo" />
+                <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_DeNghiKiemTra">
+            <EntityTypeMapping TypeName="DeNghiModel.tbl_DeNghiKiemTra">
+              <MappingFragment StoreEntitySet="tbl_DeNghiKiemTra">
+                <ScalarProperty Name="STT" ColumnName="STT" />
+                <ScalarProperty Name="Tên" ColumnName="Tên" />
+                <ScalarProperty Name="Ngày_đăng_ký" ColumnName="Ngày đăng ký" />
+                <ScalarProperty Name="Phường" ColumnName="Phường" />
+                <ScalarProperty Name="Quận" ColumnName="Quận" />
+                <ScalarProperty Name="Địa_chỉ" ColumnName="Địa chỉ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

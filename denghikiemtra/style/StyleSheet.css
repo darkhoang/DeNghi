@@ -1,0 +1,24 @@
+﻿body {
+    box-sizing:border-box;
+   
+}
+.find-input
+{
+    width:100%;
+    border:1px dotted blue;
+    float:left;
+}
+
+.input
+{
+    margin-top:1% ;
+    margin-bottom:1%;
+    padding:1px;
+    width:15%;
+}
+.find
+{
+    color:red;
+    margin:1% 0% 0% 4%;
+    width:10%;
+}

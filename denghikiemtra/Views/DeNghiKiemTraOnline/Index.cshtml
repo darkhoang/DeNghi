@@ -1,0 +1,120 @@
+﻿@model IEnumerable<denghikiemtra.Models.tbl_DeNghiKiemTraOnline>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Admin</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create.cshtml")
+</p>
+
+    @*find tên*@
+    <label>Tìm kiếm theo</label> <br />
+    <div class="find-input">
+           
+        <label class="find"> Tên:</label>
+        <input type="text" class="input" name="ten" />
+            
+        @*find status*@
+            
+        <label class="find"> Trạng thái:</label>
+        <input type="text" class="input" name="status" />
+           
+
+        @*find ngày đăng ký *@
+
+        <label class="find"> Ngày đăng ký :</label>
+        <input type="text" class="input" name="NgayDK" />
+
+
+
+        @*Find Phòng*@
+
+        <label class="find">Phường: </label>
+        <input type="text" class="input" name="Sub-district" />
+
+
+
+        @*Find quận*@
+
+        <label class="find">Quận: </label>
+        <input type="text" class="input" name="district" />
+
+
+        @*Find địa chỉ*@
+
+        <label class="find">Địa chỉ: </label>
+        <input type="text" class="input" name="address" />
+
+    </div>
+
+    <table class="table">
+        <tr>
+            @* modelItem thì item. các trường có trong sql  *@
+            <th>
+                @Html.DisplayNameFor(model => model.STT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ten)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaChi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phuong)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LyDo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HinhAnh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrangThai)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                @* modelItem thì item. các trường có trong sql  *@
+                <td>
+                    @Html.DisplayFor(modelItem => item.STT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ten)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiaChi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phuong)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LyDo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HinhAnh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrangThai)
+                </td>
+                <td>
+                    @* dùng để tăng biến đếm STT*@
+                    @Html.ActionLink("Edit", "Edit", new { id = item.STT }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.STT }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.STT })
+                </td>
+            </tr>
+        }
+
+    </table>
