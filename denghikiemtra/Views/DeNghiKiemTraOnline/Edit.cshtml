@@ -7,15 +7,15 @@
 <h2>Edit</h2>
 
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
+@using (Html.BeginForm("Edit", "DeNghiKiemTraOnline", null, FormMethod.Post, new { enctype = "multipart/fomr-data" }))
+            //khai bao de thuc thi function edit
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
         <h4>ApplicationUser</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Ten, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -59,70 +59,75 @@
             </div>
         </div>
 
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.PhoneNumberConfirmed, htmlAttributes: new { @class = "control-label col-md-2" })
+      <div class="form-group">
+            @Html.LabelFor(model => model.LyDo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.PhoneNumberConfirmed)
-                    @Html.ValidationMessageFor(model => model.PhoneNumberConfirmed, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>*@
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.TwoFactorEnabled, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.TwoFactorEnabled)
-                    @Html.ValidationMessageFor(model => model.TwoFactorEnabled, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.LyDo)
+                    @Html.ValidationMessageFor(model => model.LyDo, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.LockoutEndDateUtc, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LockoutEndDateUtc, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LockoutEndDateUtc, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.LockoutEnabled, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.HinhAnh, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.LockoutEnabled)
-                    @Html.ValidationMessageFor(model => model.LockoutEnabled, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.HinhAnh)
+                    @Html.ValidationMessageFor(model => model.HinhAnh, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
-
         <div class="form-group">
-            @Html.LabelFor(model => model.AccessFailedCount, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.AccessFailedCount, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.AccessFailedCount, "", new { @class = "text-danger" })
+        @Html.LabelFor(model => model.STT, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.STT, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.STT, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @*<div class="form-group">
+        @Html.LabelFor(model => model.LockoutEnabled, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.LockoutEnabled)
+                @Html.ValidationMessageFor(model => model.LockoutEnabled, "", new { @class = "text-danger" })
             </div>
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+    <div class="form-group">
+        @Html.LabelFor(model => model.AccessFailedCount, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.AccessFailedCount, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.AccessFailedCount, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+        </div>
+    </div>*@
 
         @*<div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Save" class="btn btn-default" />
         </div>
     </div>*@
+    <p>
+        <input type="submit" value="save" />
+    </p>
+
     </div>
+
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List","Index")
+    
 </div>
 
 @section Scripts {

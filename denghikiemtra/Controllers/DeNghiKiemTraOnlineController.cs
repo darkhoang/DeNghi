@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using denghikiemtra.Models;
+using PagedList;
 
 namespace denghikiemtra.Controllers
 {
@@ -15,13 +16,60 @@ namespace denghikiemtra.Controllers
         private DeNghiEntities db = new DeNghiEntities();
 
         // GET: DeNghiKiemTraOnline
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString, string currentFilter, int? page)
         {
-            return View(db.tbl_DeNghiKiemTraOnline.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            //ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewBag.STTSortParm = sortOrder == "STT" ? "STT_desc" : "STT";
+            //ViewBag.PhuongSortParm = sortOrder == "phuong" ? "phuong_desc" : "phuong";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var khachhangfind = from s in db.tbl_DeNghiKiemTraOnline
+                           select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                khachhangfind = khachhangfind.Where(s => s.Ten.Contains(searchString));
+            //                           //|| s.FirstMidName.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "STT_desc":
+                    khachhangfind = khachhangfind.OrderByDescending(s => s.STT);
+                    break;
+                case "name_desc":
+                    khachhangfind = khachhangfind.OrderByDescending(s => s.Ten);
+                    break;
+
+                //case "phuong":
+                //   khachhangfind = khachhangfind.OrderBy(s => s.Phuong);
+                //   break;
+                //case "phuong_desc":
+                //    khachhangfind = khachhangfind.OrderByDescending(s => s.Phuong);
+                //    break;
+                default:
+                    khachhangfind = khachhangfind.OrderBy(s => s.Ten);
+                    break;
+            }
+            int pageSize = 4;
+            int pageNumber = (page ?? 1);
+            //return View(khachhangfind.ToList());
+            return View(khachhangfind.ToPagedList(pageNumber, pageSize));
         }
 
+        
         // GET: DeNghiKiemTraOnline/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(int id)
         {
             if (id == null)
             {
@@ -63,12 +111,8 @@ namespace denghikiemtra.Controllers
         }
 
         // GET: DeNghiKiemTraOnline/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             tbl_DeNghiKiemTraOnline applicationUser = db.tbl_DeNghiKiemTraOnline.Find(id);
             if (applicationUser == null)
             {
@@ -80,9 +124,9 @@ namespace denghikiemtra.Controllers
         // POST: DeNghiKiemTraOnline/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Ten,DiaChi,Phuong,Quan,LyDo,HinhAnh,TrangThai")] tbl_DeNghiKiemTraOnline applicationUser)
+        [HttpPost]
+        public ActionResult Edit([Bind(Include = "STT,Ten,DiaChi,Phuong,Quan,LyDo,HinhAnh,TrangThai")] tbl_DeNghiKiemTraOnline applicationUser)
         {
             if (ModelState.IsValid)
             {
@@ -90,11 +134,12 @@ namespace denghikiemtra.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            
             return View(applicationUser);
         }
 
         // GET: DeNghiKiemTraOnline/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int id)
         {
             if (id == null)
             {
@@ -111,7 +156,7 @@ namespace denghikiemtra.Controllers
         // POST: DeNghiKiemTraOnline/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
             tbl_DeNghiKiemTraOnline applicationUser = db.tbl_DeNghiKiemTraOnline.Find(id);
             db.tbl_DeNghiKiemTraOnline.Remove(applicationUser);

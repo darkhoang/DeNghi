@@ -1,17 +1,33 @@
-﻿@model IEnumerable<denghikiemtra.Models.tbl_DeNghiKiemTraOnline>
+﻿@*@model IEnumerable<denghikiemtra.Models.tbl_DeNghiKiemTraOnline> *@
+
+@model PagedList.IPagedList<denghikiemtra.Models.tbl_DeNghiKiemTraOnline>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Admin</h2>
+<h2>THÔNG TIN KHÁCH HÀNG</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create.cshtml")
+    @Html.ActionLink("Create New", "Create")
 </p>
 
-    @*find tên*@
-    <label>Tìm kiếm theo</label> <br />
+@using (Html.BeginForm(@*"Index", "khachhangfind", FormMethod.Get*@))
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+@*https://youngdragontrieu.wordpress.com/2016/06/02/tao-search-box-don-gian-trong-aps-net-mvc/*@
+   
+ 
+    
+
+
+
     <div class="find-input">
            
         <label class="find"> Tên:</label>
@@ -53,19 +69,30 @@
     <table class="table">
         <tr>
             @* modelItem thì item. các trường có trong sql  *@
+         
             <th>
-                @Html.DisplayNameFor(model => model.STT)
+                @Html.ActionLink("STT", "Index", new { sortOrder = ViewBag.STTSortParm, currentFilter = ViewBag.CurrentFilter })
             </th>
+
             <th>
-                @Html.DisplayNameFor(model => model.Ten)
+                @Html.ActionLink("Ten", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+
+                @*@Html.DisplayNameFor(model => model.Ten)*@
             </th>
-            <th>
+
+            @*<th>
                 @Html.DisplayNameFor(model => model.DiaChi)
-            </th>
+            </th>*@
+
             <th>
-                @Html.DisplayNameFor(model => model.Phuong)
+                @*@Html.ActionLink("Phuong", "Index", new { sortOrder = ViewBag.PhuongSortParm, currentFilter = ViewBag.CurrentFilter })*@
+
+                @*@Html.DisplayNameFor(model => model.Phuong)*@
             </th>
-            <th>
+
+            @*làm phân trang*@
+
+            @*<th>
                 @Html.DisplayNameFor(model => model.Quan)
             </th>
             <th>
@@ -77,7 +104,8 @@
             <th>
                 @Html.DisplayNameFor(model => model.TrangThai)
             </th>
-            <th></th>
+            <th></th>*@
+
         </tr>
 
         @foreach (var item in Model)
@@ -118,3 +146,9 @@
         }
 
     </table>
+
+        <br />
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+            new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

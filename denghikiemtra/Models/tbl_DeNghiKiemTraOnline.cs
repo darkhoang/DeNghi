@@ -12,7 +12,7 @@ namespace denghikiemtra.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_DeNghiKiemTraOnline
+    public class tbl_DeNghiKiemTraOnline
     {
         public int STT { get; set; }
         public string Ten { get; set; }
